@@ -3,6 +3,6 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 
-const test = 'Hello World';
+const test1 = 'Hello World';
 
-console.log(test);
+console.log(test1);
