@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>MyList</title>
     <link rel="stylesheet" href="../src/style.css">
   </head>
   <body>
-  <div>Test</div>
+    <section id="addStuff">
+      <div id="addList">
+        <input type="text" id="newList">
+        <button id="submitList">Add List</button>
+      </div>
+      <div id="addTask">
+        <input type="text" id="newTask" value="Create task">
+        <input type="text" id="tskPriority" value="1">
+        <input type="text" id="tskDetail" value="more details">
+        <input type="text" id="tskComplete" value="true">
+        <button id="submitTask">Add Task</button>
+      </div>
+    </section>
+    <section id="content">
+    <div id="listWindow"></div>
+    <div id="taskWindow"></div>
+  </section>
 	<script src="bundle.js"></script>
   </body>
 </html>
