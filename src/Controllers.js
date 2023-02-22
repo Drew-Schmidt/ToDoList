@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import * as dynamicElements from './DOMfunctions';
 
 const myList = [];
 
@@ -8,7 +9,7 @@ const List = function (name, task) {
   this.task = task;
 };
 
-// This List For Testing Only
+// // This List For Testing Only
 const newList = new List('Test', [
   {
     name: 'Laundry', priority: 1, notes: 'wash and dry clothes', complete: true,
@@ -21,6 +22,7 @@ const newList = new List('Test', [
   },
 ]);
 myList.push(newList);
+
 console.log(myList[0].task[2].complete);
 
 // Reset data-log values
@@ -54,9 +56,10 @@ const createTaskObject = () => {
     document.querySelector('#tskDetail').value,
     document.querySelector('#tskComplete').value,
   ];
-  // Pushes values into an assigned list, but only works manually right now.
+  // Pushes values into an assigned list
   const newTask = new Task(name, priority, notes, complete);
-  myList[0].task.push(newTask);
+  const test = document.querySelector('input[type="radio"]:checked');
+  myList[test.getAttribute('data-log')].task.push(newTask);
   logReset('.taskDiv');
 };
 
@@ -72,11 +75,21 @@ const completeTask = () => {
 
 // Remove task from list
 const removeTask = () => {
-  const deleteBtn = document.querySelectorAll('.deleteBtn');
-  deleteBtn.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.target.parentNode.remove();
-      logReset();
+  // remove from data array
+};
+
+// Select active list
+const selectList = () => {
+  const activeList = document.querySelectorAll('.listDiv');
+  activeList.forEach((list) => {
+    list.addEventListener('click', (e) => {
+      document.querySelector('#taskWindow').textContent = '';
+      const active = e.target.getAttribute('data-log');
+      myList[active].task.forEach((task) => {
+        // console.log(task);
+        dynamicElements.addTaskElements(task.name);
+        logReset('.taskDiv');
+      });
     });
   });
 };
@@ -88,4 +101,5 @@ export {
   completeTask,
   logReset,
   myList,
+  selectList,
 };

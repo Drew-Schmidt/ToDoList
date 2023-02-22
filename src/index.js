@@ -5,7 +5,7 @@ import _, { forEach } from 'lodash';
 import * as dynamicElements from './DOMfunctions';
 import * as controlFunction from './Controllers';
 
-// Query static buttons
+// Query
 const submitList = document.querySelector('#submitList');
 const submitTask = document.querySelector('#submitTask');
 const addList = document.querySelector('#newList');
@@ -17,9 +17,11 @@ submitList.addEventListener('click', () => {
   dynamicElements.addList(addList);
   // Save form data to myList array
   controlFunction.createListObject();
+  // Select active list
+  controlFunction.selectList();
 });
 
-// Create New task
+// Functional Test of dynamic task creation
 submitTask.addEventListener('click', () => {
   // Create elements from form values
   dynamicElements.addTaskElements(addTask.value);

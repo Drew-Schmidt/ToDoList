@@ -4,12 +4,13 @@ body{
   flex-direction: column;
   justify-content: baseline;
   align-items: center;
+  background-color: rgb(116, 80, 182);
 }
 
 #addStuff{
   height: 4rem;
   width: 100%;
-  background-color: lightblue;
+  background-color: rgb(92, 172, 198);
   display: flex;
   align-items: center;
 }
@@ -26,6 +27,7 @@ body{
   align-items: center;
   width: 10rem;
   height: 100%;
+  background-color: rgb(131, 101, 159);
 }
 
 #taskWindow {
@@ -34,22 +36,23 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center; 
-  background-color: lightgreen;
+  background-color: rgb(134, 132, 163);
 }
 
 .taskDiv {
   height: 3rem;
   width: 98%;
-  background-color: aqua;
+  background-color: rgb(70, 70, 146);
 }
 
 .taskDiv:hover {
-  background-color: blue;
+  background-color: rgb(94, 94, 155);
   color: white;
 }
 
-.listDiv:hover {
+input[type="radio"]{
+  width: 5rem;
+  height: 4rem;
   background-color: blue;
-  color:aliceblue;
-  cursor: pointer;
+  text-decoration: none;
 }
