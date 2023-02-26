@@ -10,7 +10,7 @@ const List = function (name, task) {
 };
 
 // // This List For Testing Only
-const newList = new List('Test', [
+const newList = new List('Main', [
   {
     name: 'Laundry', priority: 1, notes: 'wash and dry clothes', complete: true,
   },
@@ -65,12 +65,7 @@ const createTaskObject = () => {
 
 // Mark task complete
 const completeTask = () => {
-  const completeBtn = document.querySelectorAll('.completeBtn');
-  completeBtn.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.target.style.border = 'solid .2rem blue';
-    });
-  });
+  // mark complete
 };
 
 // Remove task from list
@@ -87,7 +82,12 @@ const selectList = () => {
       const active = e.target.getAttribute('data-log');
       myList[active].task.forEach((task) => {
         // console.log(task);
-        dynamicElements.addTaskElements(task.name);
+        dynamicElements.addTaskElements(
+          task.name,
+          task.priority,
+          task.notes,
+          task.complete,
+        );
         logReset('.taskDiv');
       });
     });
