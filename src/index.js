@@ -1,57 +1,40 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
+// eslint-disable-next-line no-unused-vars
 import _, { forEach } from 'lodash';
-import * as dynamicElements from './DOMfunctions';
-import * as controlFunction from './Controllers';
+import * as dynElements from './DynElements';
+import * as objects from './Objects';
 
-// Query
+// Work into other files as able
 const submitList = document.querySelector('#submitList');
 const submitTask = document.querySelector('#submitTask');
-const addList = document.querySelector('#newList');
-const addTask = document.querySelector('#newTask');
-const addPriority = document.querySelector('#tskPriority');
-const addDetail = document.querySelector('#tskDetail');
+const newList = document.querySelector('#newList');
+const newTask = document.querySelector('#newTask');
+const priority = document.querySelector('#tskPriority');
+const detail = document.querySelector('#tskDetail');
 
 // Create New list/project
 submitList.addEventListener('click', () => {
-  // Create elements from form value
-  dynamicElements.addList(addList.value);
-  // Save form data to myList array
-  controlFunction.createListObject();
-  // Select active list
-  controlFunction.selectList();
+  dynElements.list(newList.value);
+  dynElements.selectList();
+  objects.createListObject();
 });
 
 // Functional Test of dynamic task creation
 submitTask.addEventListener('click', () => {
-  // Create elements from form values
-  dynamicElements.addTaskElements(addTask.value, addPriority.value, addDetail.value);
-  // Save form data to list object
-  controlFunction.createTaskObject();
-  // Mark task completed
-  controlFunction.completeTask();
-  // Remove task
-  controlFunction.removeTask();
-  // Edit task
+  dynElements.addTaskElements(newTask.value, priority.value, detail.value);
+  objects.createTaskObject();
 });
 
-// Test task population from lists within myLists
-// Double forEach() for 'all to-do items' at window load
-controlFunction.myList.forEach((list) => {
-  console.log(list.name);
-  dynamicElements.addList(list.name);
+// This belongs in a different file
+objects.myList.forEach((list) => {
+  dynElements.list(list.name);
   list.task.forEach((task) => {
     // Create elements from list objects
-    dynamicElements.addTaskElements(
+    dynElements.addTaskElements(
       task.name,
       task.priority,
       task.notes,
       task.complete,
     );
-    // Mark task Completed
-    controlFunction.completeTask();
-    // Remove task
-    controlFunction.removeTask();
+    objects.logReset('.taskDiv');
   });
 });

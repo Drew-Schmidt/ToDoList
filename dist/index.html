@@ -14,15 +14,21 @@
         <button id="submitList">Add List</button>
       </div>
       <div id="addTask">
-        <input type="text" id="newTask" value="Create task">
-        <input type="text" id="tskPriority" value="1">
-        <input type="text" id="tskDetail" value="more details">
-        <input type="text" id="tskComplete" value="true">
+        <input type="text" id="newTask" value="Task">
+        <select id="tskPriority" name="tskPriority">
+          <option>Select one</option>
+          
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+
+        <input type="text" id="tskDetail" value="details">
         <button id="submitTask">Add Task</button>
       </div>
     </section>
     <section id="content">
-    <div id="listWindow"></div>
+    <div id="listWindow">
+      <h3>Projects</h4>
+    </div>
       <div id="taskWindow"></div>
   </section>
 	<script src="bundle.js"></script>
