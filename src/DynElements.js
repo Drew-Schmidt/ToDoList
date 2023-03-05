@@ -1,8 +1,16 @@
-import * as objects from './Objects';
+import * as objects from './listObject';
 
 // Select content windows
 const contentWindow = document.querySelector('#taskWindow');
 const projectWindow = document.querySelector('#listWindow');
+
+// Reset the data-log attributes
+const logReset = (elementClass) => {
+  const logNumber = document.querySelectorAll(elementClass);
+  logNumber.forEach((item, index) => {
+    item.setAttribute('data-log', index);
+  });
+};
 
 // FUNCTION: Add Task Elements
 const addTaskElements = (task, priority, note, complete) => {
@@ -112,10 +120,15 @@ const selectList = () => {
           task.complete,
         );
         // Set Data-log values
-        objects.logReset('.taskDiv');
+        logReset('.taskDiv');
       });
     });
   });
 };
 
-export { addTaskElements, addList, selectList };
+export {
+  addTaskElements,
+  addList,
+  selectList,
+  logReset,
+};

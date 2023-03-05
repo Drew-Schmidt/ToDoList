@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import _, { forEach } from 'lodash';
 import * as dynElements from './DynElements';
-import * as objects from './Objects';
+import * as objects from './listObject';
 
 // Work into other files as able
 const submitList = document.querySelector('#submitList');
@@ -13,20 +13,31 @@ const detail = document.querySelector('#tskDetail');
 
 // Create New list/project
 submitList.addEventListener('click', () => {
-  dynElements.list(newList.value);
-  dynElements.selectList();
-  objects.createListObject();
+  if (!newList.value) {
+    // Add Notification that form is empty
+    console.log('yikes');
+  } else {
+    dynElements.addList(newList.value);
+    dynElements.selectList();
+    objects.createListObject();
+  }
 });
 
-// Functional Test of dynamic task creation
+// Create New Task
 submitTask.addEventListener('click', () => {
-  dynElements.addTaskElements(newTask.value, priority.value, detail.value);
-  objects.createTaskObject();
+  if (!newTask.value || !detail.value) {
+    // Add Notification that form is empty
+    console.log('yikes again');
+  } else {
+    dynElements.addTaskElements(newTask.value, priority.value, detail.value);
+    dynElements.logReset('.taskDiv');
+    objects.createTaskObject();
+  }
 });
 
 // This belongs in a different file
 objects.myList.forEach((list) => {
-  dynElements.list(list.name);
+  dynElements.addList(list.name);
   list.task.forEach((task) => {
     // Create elements from list objects
     dynElements.addTaskElements(
@@ -35,6 +46,6 @@ objects.myList.forEach((list) => {
       task.notes,
       task.complete,
     );
-    objects.logReset('.taskDiv');
+    dynElements.logReset('.taskDiv');
   });
 });
