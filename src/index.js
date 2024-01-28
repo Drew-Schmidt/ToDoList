@@ -1,40 +1,48 @@
 // eslint-disable-next-line no-unused-vars
-import _, { forEach } from 'lodash';
-import * as dynElements from './DynElements';
-import * as objects from './Objects';
+import _, { forEach, sortedLastIndexOf } from 'lodash';
+import * as DOM from './ClientApp/dynamicElements';
+import * as tasks from './Infrastructure/tasks';
+import * as projects from './Infrastructure/projects';
 
-// Work into other files as able
-const submitList = document.querySelector('#submitList');
-const submitTask = document.querySelector('#submitTask');
-const newList = document.querySelector('#newList');
-const newTask = document.querySelector('#newTask');
-const priority = document.querySelector('#tskPriority');
-const detail = document.querySelector('#tskDetail');
+// identify button and wait for list to be submitted
+const submitTask = document.querySelector('#submitTask')
+const submitList = document.querySelector('#submitList')
 
-// Create New list/project
+
 submitList.addEventListener('click', () => {
-  dynElements.list(newList.value);
-  dynElements.selectList();
-  objects.createListObject();
-});
-
-// Functional Test of dynamic task creation
-submitTask.addEventListener('click', () => {
-  dynElements.addTaskElements(newTask.value, priority.value, detail.value);
-  objects.createTaskObject();
-});
-
-// This belongs in a different file
-objects.myList.forEach((list) => {
-  dynElements.list(list.name);
-  list.task.forEach((task) => {
-    // Create elements from list objects
-    dynElements.addTaskElements(
-      task.name,
-      task.priority,
-      task.notes,
-      task.complete,
-    );
-    objects.logReset('.taskDiv');
+  createListObject();
   });
-});
+
+// Create List
+const createListObject = () => {
+  const projName = document.querySelector('#newList').value
+  projects.addNewProj(projName);
+  console.log(projects.projDb)
+};
+
+submitTask.addEventListener('click', () => {
+  createTaskObject();
+  });
+
+// Create Task
+const createTaskObject = () => {
+  const [task, info, priority, dueDate] = [
+    //document.querySelector('#tskList').value,
+    document.querySelector('#newTask').value,
+    document.querySelector('#tskDetail').value,
+    document.querySelector('#tskPriority').value,
+    document.querySelector('#tskDue').value
+  ];
+
+  // (list, task, info, priority, status, dueDate)
+  tasks.addNewTask(
+    "Lisr name", //Not functional
+    task,
+    info,
+    priority,
+    false, // defaults to incomplete
+    dueDate
+  );
+  console.log(tasks.taskDb);
+} 
+
